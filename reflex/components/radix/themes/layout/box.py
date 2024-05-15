@@ -1,7 +1,7 @@
 """Declarative layout and common spacing props."""
 from __future__ import annotations
 
-from reflex import el
+from reflex.components import el
 
 from ..base import RadixThemesComponent
 

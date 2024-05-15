@@ -3,7 +3,7 @@
 from typing import Literal, Union
 
 import reflex as rx
-from reflex import el
+from reflex.components import el
 from reflex.components.component import Component, ComponentNamespace
 from reflex.components.lucide.icon import Icon
 from reflex.vars import Var

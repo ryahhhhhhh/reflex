@@ -1,7 +1,7 @@
 """Interactive components provided by @radix-ui/themes."""
 from typing import List, Literal
 
-from reflex import el
+from reflex.components import el
 from reflex.components.component import ComponentNamespace
 from reflex.vars import Var
 

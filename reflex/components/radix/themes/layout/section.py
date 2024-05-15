@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-from reflex import el
+from reflex.components import el
 from reflex.vars import Var
 
 from ..base import RadixThemesComponent

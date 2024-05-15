@@ -1,7 +1,7 @@
 """Interactive components provided by @radix-ui/themes."""
 from typing import Literal, Union
 
-from reflex import el
+from reflex.components import el
 from reflex.vars import Var
 
 from ..base import (

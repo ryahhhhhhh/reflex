@@ -4,7 +4,7 @@ https://www.radix-ui.com/themes/docs/theme/typography
 """
 from __future__ import annotations
 
-from reflex import el
+from reflex.components import el
 from reflex.vars import Var
 
 from ..base import (

@@ -13,6 +13,7 @@ from typing import Type
 from reflex.page import page as page
 from reflex.utils import console
 from reflex.utils.format import to_snake_case
+from reflex import components
 
 _ALL_COMPONENTS = [
     # Core
