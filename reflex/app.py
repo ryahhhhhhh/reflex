@@ -41,7 +41,7 @@ from reflex.base import Base
 from reflex.compiler import compiler
 from reflex.compiler import utils as compiler_utils
 from reflex.compiler.compiler import ExecutorSafeFunctions
-from reflex.components import connection_modal, connection_pulser
+from reflex.components.core import connection_modal, connection_pulser
 from reflex.components.base.app_wrap import AppWrap
 from reflex.components.base.fragment import Fragment
 from reflex.components.component import (
@@ -54,7 +54,7 @@ from reflex.components.core.client_side_routing import (
     wait_for_client_redirect,
 )
 from reflex.components.core.upload import Upload, get_upload_dir
-from reflex.components.radix import themes
+from reflex.components.radix.themes import theme
 from reflex.config import get_config
 from reflex.event import Event, EventHandler, EventSpec
 from reflex.middleware import HydrateMiddleware, Middleware
@@ -122,7 +122,7 @@ class App(Base):
     """
 
     # The global [theme](https://reflex.dev/docs/styling/theming/#theme) for the entire app.
-    theme: Optional[Component] = themes.theme(accent_color="blue")
+    theme: Optional[Component] = theme(accent_color="blue")
 
     # The [global style](https://reflex.dev/docs/styling/overview/#global-styles}) for the app.
     style: ComponentStyle = {}

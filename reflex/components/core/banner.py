@@ -205,3 +205,7 @@ class ConnectionPulser(Div):
             width="100vw",
             height="0",
         )
+
+connection_banner = ConnectionBanner.create
+connection_modal = ConnectionModal.create
+connection_pulser = ConnectionPulser.create
