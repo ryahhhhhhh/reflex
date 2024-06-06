@@ -4,8 +4,9 @@ from __future__ import annotations
 from typing import Any, Dict, List, Union
 
 from reflex.constants import EventTriggers
-from reflex.constants.colors import Color
 from reflex.vars import Var
+
+from reflex.constants.colors import Color
 
 from .recharts import (
     LiteralAnimationEasing,
@@ -33,12 +34,6 @@ class Axis(Recharts):
     # If set true, the axis do not display in the chart.
     hide: Var[bool]
 
-    # The width of axis which is usually calculated internally.
-    width: Var[Union[str, int]]
-
-    # The height of axis, which can be setted by user.
-    height: Var[Union[str, int]]
-
     # The orientation of axis 'top' | 'bottom'
     orientation: Var[LiteralOrientationTopBottom]
 
@@ -57,6 +52,9 @@ class Axis(Recharts):
     # If set false, no axis line will be drawn. If set a object, the option is the configuration of axis line.
     axis_line: Var[bool]
 
+    # If set false, no axis tick lines will be drawn. If set a object, the option is the configuration of tick lines.
+    tick_line: Var[bool]
+
     # If set true, flips ticks around the axis line, displaying the labels inside the chart instead of outside.
     mirror: Var[bool]
 
@@ -72,6 +70,24 @@ class Axis(Recharts):
     # The name of data displayed in the axis. This option will be used to represent an index in a scatter chart.
     name: Var[Union[str, int]]
 
+    # Set the values of axis ticks manually.
+    ticks: Var[List[Union[str, int]]]
+    
+    # If set false, no ticks will be drawn.
+    tick: Var[bool]
+
+    # The count of axis ticks.
+    tick_count: Var[int] 
+
+    # If set false, no axis tick lines will be drawn.
+    tick_line: Var[bool]
+
+    # The length of tick line.
+    tick_size: Var[int] 
+
+    # The minimum gap between two adjacent labels
+    min_tick_gap: Var[int]  
+
     def get_event_triggers(self) -> dict[str, Union[Var, Any]]:
         """Get the event triggers that pass the component's value to the handler.
 
@@ -80,8 +96,6 @@ class Axis(Recharts):
         """
         return {
             EventTriggers.ON_CLICK: lambda: [],
-            EventTriggers.ON_MOUSE_UP: lambda: [],
-            EventTriggers.ON_MOUSE_DOWN: lambda: [],
             EventTriggers.ON_MOUSE_MOVE: lambda: [],
             EventTriggers.ON_MOUSE_OVER: lambda: [],
             EventTriggers.ON_MOUSE_OUT: lambda: [],
@@ -96,9 +110,6 @@ class XAxis(Axis):
     tag = "XAxis"
 
     alias = "RechartsXAxis"
-
-    # Ensures that all datapoints within a chart contribute to its domain calculation, even when they are hidden
-    include_hidden: Var[bool] = Var.create_safe(False)
 
 
 class YAxis(Axis):
@@ -213,8 +224,6 @@ class Cartesian(Recharts):
         return {
             EventTriggers.ON_CLICK: lambda: [],
             EventTriggers.ON_MOUSE_MOVE: lambda: [],
-            EventTriggers.ON_MOUSE_UP: lambda: [],
-            EventTriggers.ON_MOUSE_DOWN: lambda: [],
             EventTriggers.ON_MOUSE_OVER: lambda: [],
             EventTriggers.ON_MOUSE_OUT: lambda: [],
             EventTriggers.ON_MOUSE_ENTER: lambda: [],
@@ -237,6 +246,9 @@ class Area(Cartesian):
 
     # The color of the area fill.
     fill: Var[Union[str, Color]]
+
+    # The layout of area, usually inherited from parent
+    layout: Var[LiteralLayout]
 
     # The interpolation type of area. And customized interpolation function can be set to type. 'basis' | 'basisClosed' | 'basisOpen' | 'bumpX' | 'bumpY' | 'bump' | 'linear' | 'linearClosed' | 'natural' | 'monotoneX' | 'monotoneY' | 'monotone' | 'step' | 'stepBefore' | 'stepAfter' |
     type_: Var[LiteralAreaType]
@@ -380,23 +392,6 @@ class Funnel(Cartesian):
 
     # Valid children components
     _valid_children: List[str] = ["LabelList", "Cell"]
-
-    def get_event_triggers(self) -> dict[str, Union[Var, Any]]:
-        """Get the event triggers that pass the component's value to the handler.
-
-        Returns:
-            A dict mapping the event trigger to the var that is passed to the handler.
-        """
-        return {
-            EventTriggers.ON_CLICK: lambda: [],
-            EventTriggers.ON_MOUSE_MOVE: lambda: [],
-            EventTriggers.ON_MOUSE_UP: lambda: [],
-            EventTriggers.ON_MOUSE_DOWN: lambda: [],
-            EventTriggers.ON_MOUSE_OVER: lambda: [],
-            EventTriggers.ON_MOUSE_OUT: lambda: [],
-            EventTriggers.ON_MOUSE_ENTER: lambda: [],
-            EventTriggers.ON_MOUSE_LEAVE: lambda: [],
-        }
 
 
 class ErrorBar(Recharts):
