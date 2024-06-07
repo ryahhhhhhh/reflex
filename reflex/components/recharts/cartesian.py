@@ -7,6 +7,9 @@ from reflex.constants import EventTriggers
 from reflex.vars import Var
 
 from reflex.constants.colors import Color
+from reflex.event import EventHandler
+from . import recharts
+recharts
 
 from .recharts import (
     LiteralAnimationEasing,
@@ -17,13 +20,13 @@ from .recharts import (
     LiteralLayout,
     LiteralLineType,
     LiteralOrientationTopBottom,
+    LiteralOrientationLeftRight,
     LiteralOrientationTopBottomLeftRight,
     LiteralPolarRadiusType,
     LiteralScale,
     LiteralShape,
     Recharts,
 )
-
 
 class Axis(Recharts):
     """A base class for axes in Recharts."""
@@ -88,20 +91,30 @@ class Axis(Recharts):
     # The minimum gap between two adjacent labels
     min_tick_gap: Var[int]  
 
-    def get_event_triggers(self) -> dict[str, Union[Var, Any]]:
-        """Get the event triggers that pass the component's value to the handler.
+    # The customized event handler of click on the ticks of this axis
+    on_click: EventHandler[lambda: []]
 
-        Returns:
-            A dict mapping the event trigger to the var that is passed to the handler.
-        """
-        return {
-            EventTriggers.ON_CLICK: lambda: [],
-            EventTriggers.ON_MOUSE_MOVE: lambda: [],
-            EventTriggers.ON_MOUSE_OVER: lambda: [],
-            EventTriggers.ON_MOUSE_OUT: lambda: [],
-            EventTriggers.ON_MOUSE_ENTER: lambda: [],
-            EventTriggers.ON_MOUSE_LEAVE: lambda: [],
-        }
+    # The customized event handler of mousedown on the ticks of this axis
+    on_mouse_down: EventHandler[lambda: []] = None
+
+    # The customized event handler of mouseup on the ticks of this axis
+    on_mouse_up: EventHandler[lambda: []] = None
+
+    # The customized event handler of mousemove on the ticks of this axis
+    on_mouse_move: EventHandler[lambda: []] = None
+
+    # The customized event handler of mouseover on the ticks of this axis
+    on_mouse_over: EventHandler[lambda: []] = None
+
+    # The customized event handler of mouseout on the ticks of this axis
+    on_mouse_out: EventHandler[lambda: []] = None
+
+    # The customized event handler of mouseenter on the ticks of this axis
+    on_mouse_enter: EventHandler[lambda: []] = None
+
+    # The customized event handler of mouseleave on the ticks of this axis
+    on_mouse_leave: EventHandler[lambda: []] = None
+
 
 
 class XAxis(Axis):
@@ -110,6 +123,9 @@ class XAxis(Axis):
     tag = "XAxis"
 
     alias = "RechartsXAxis"
+
+    # The id of x-axis which is corresponding to the data.
+    x_axis_id: Var[Union[str, int]]
 
 
 class YAxis(Axis):
@@ -122,6 +138,11 @@ class YAxis(Axis):
     # The key of data displayed in the axis.
     data_key: Var[Union[str, int]]
 
+    # The id of y-axis which is corresponding to the data.
+    y_axis_id: Var[Union[str, int]]
+
+    # The orientation of axis 'left' | 'right'
+    orientation: Var[LiteralOrientationLeftRight]
 
 class ZAxis(Recharts):
     """A ZAxis component in Recharts."""

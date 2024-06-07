@@ -102,6 +102,7 @@ _SUBMOD_ATTRS: dict = {
         "LiteralOrientation",
         "LiteralOrientationLeftRightMiddle",
         "LiteralOrientationTopBottom",
+        "LiteralOrientationLeftRight",
         "LiteralOrientationTopBottomLeftRight",
         "LiteralPolarRadiusType",
         "LiteralScale",

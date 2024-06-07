@@ -94,6 +94,7 @@ from .recharts import (
     LiteralOrientationLeftRightMiddle as LiteralOrientationLeftRightMiddle,
 )
 from .recharts import LiteralOrientationTopBottom as LiteralOrientationTopBottom
+from .recharts import LiteralOrientationLeftRight as LiteralOrientationLeftRight
 from .recharts import (
     LiteralOrientationTopBottomLeftRight as LiteralOrientationTopBottomLeftRight,
 )
