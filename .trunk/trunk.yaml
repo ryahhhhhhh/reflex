@@ -23,16 +23,26 @@ lint:
     - bandit@1.7.9
     - black@24.8.0
     - checkov@3.2.222
+    - codespell@2.3.0
+    - deno@1.45.5
+    - dustilock@1.2.0
     - flake8@7.1.1
     - git-diff-check
+    - gitleaks@8.18.4
     - hadolint@2.12.0
     - isort@5.13.2
+    - kube-linter@0.6.4
+    - markdown-link-check@3.12.2
     - markdownlint@0.41.0
+    - markdown-table-prettify@3.6.0
     - osv-scanner@1.8.3
     - oxipng@9.1.2
+    - pre-commit-hooks@4.6.0
     - prettier@3.3.3
+    - psscriptanalyzer@1.22.0
     - pylint@3.2.6
     - pyright@1.1.375
+    - remark-lint@12.0.1
     - ruff@0.5.7
     - shellcheck@0.10.0
     - shfmt@3.6.0
@@ -57,3 +67,7 @@ actions:
     - trunk-announce
     - trunk-check-pre-push
     - trunk-upgrade-available
+tools:
+  enabled:
+    - converttosarif@1.0.0
+    - pwsh@7.4.4
