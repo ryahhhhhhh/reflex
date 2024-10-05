@@ -36,6 +36,7 @@ from fastapi import FastAPI, HTTPException, Request, UploadFile
 from fastapi.middleware import cors
 from fastapi.responses import JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
+from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 from rich.progress import MofNCompleteColumn, Progress, TimeElapsedColumn
 from socketio import ASGIApp, AsyncNamespace, AsyncServer
 from starlette_admin.contrib.sqla.admin import Admin
@@ -254,10 +255,15 @@ class App(MiddlewareMixin, LifespanMixin, Base):
         [Exception], Union[EventSpec, List[EventSpec], None]
     ] = default_backend_exception_handler
 
-    def __init__(self, **kwargs):
+    def __init__(
+        self,
+        fastapi_instrumentor: Optional[FastAPIInstrumentor] = None,
+        **kwargs,
+    ):
         """Initialize the app.
 
         Args:
+            fastapi_instrumentor (Optional[FastAPIInstrumentor]): An optional FastAPIInstrumentor instance to instrument the FastAPI app.
             **kwargs: Kwargs to initialize the app with.
 
         Raises:
@@ -296,6 +302,9 @@ class App(MiddlewareMixin, LifespanMixin, Base):
 
         # Set up the admin dash.
         self._setup_admin_dash()
+
+        if fastapi_instrumentor is not None:
+            fastapi_instrumentor.instrument_app(self.api)
 
         if sys.platform == "win32" and not is_prod_mode():
             # Hack to fix Windows hot reload issue.
