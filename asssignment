@@ -1,0 +1,17 @@
+import pynecone as pc
+import random
+import asyncio
+
+class State(pc.State):
+    pass
+
+def index() -> pc.component:
+    #our main UI component
+    return pc.container(
+        pc.vstack(),
+        bg="#0284c7",
+    )
+
+    app=pc.App(state=State)
+    app.add_page(index)
+    app.compile()
